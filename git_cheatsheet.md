@@ -283,5 +283,3 @@ There are three types of configuration scopes in git
 > 3. git rm os removed file
 > 3. git status will show renaming
 </details>
-
-

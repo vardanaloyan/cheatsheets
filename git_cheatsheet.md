@@ -2,9 +2,15 @@
 
 resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 
+gitignore: https://github.com/github/gitignore
+
 ## Terminology
 - Version Control System (VCS)
 - Source Code Management (SCM)
+
+## Data Integrity
+Git supports data integrity. You can't change/modify older commits (only the latest you can),
+because it keeps the parent commit's hash in commit's metadata.
 
 ## History behind git
 <details>
@@ -84,6 +90,7 @@ resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 >     git diff <commit_hash_1>..<commit_hash_2>
 > Difference between two commits. 
 >
+> ---
 >     git diff <commit_hash_1>..HEAD
 > In place of <commit_hash_2> can be used HEAD, if we want to compare with the latest commit
 
@@ -140,7 +147,141 @@ resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 
 >       git commit -a
 > Commit without staging, but must be tracked files
+
+>       git commit --amend -m "your text here"
+> Modify the latest commit. Command will override the commit message.
+
+</details>
+
+---
+
+<details>
+  <summary> git checkout </summary>
+
+>       git checkout -- file.txt
+> UNDO changes of `file.txt` file in the working tree
 > 
+> ---
+>       git checkout -- .
+> UNDO all changes in the working tree
+> 
+> ---
+>       git checkout <commit_hash> -- file.txt
+> Retrieve  `file.txt` from the snapshot
+> 
+
+</details>
+
+---
+
+<details>
+  <summary> git reset </summary>
+
+>       git reset HEAD file.txt
+> UNDO changes of `file.txt` file in the staging tree (un-stage the file)
+> 
+> ---
+>       git reset HEAD .
+> UNDO all changes in the staging tree (un-stage files)
 
 
 </details>
+
+---
+
+<details>
+  <summary> git revert </summary>
+
+>       git revert <commit_hash>
+> UNDO/revert/reverse the commit. It will make a new commit.
+
+</details>
+
+---
+
+<details>
+  <summary> git clean </summary>
+
+>       git clean -n
+> Shows untracked files to remove
+> 
+>       git clean -f
+> Removes untracked files
+
+</details>
+
+---
+
+<details>
+  <summary> git config </summary>
+
+There are three types of configuration scopes in git
+
+1. System level (`/etc/gitconfig`)
+   - `git config --system`
+2. User level (`~/.gitconfig`)
+      - `git config --global`
+3. Project level (`Project/.git/config`)
+   - `git config
+
+
+>       git config --global core.excludesfile ~/.gitignore_global
+> Globally ignore files
+> 
+>       git config --global user.name "Name Surname"
+> Sets the username
+>       git config --global user.email "user@example.com"
+> Sets the email 
+> 
+>       git config --global user.email "user@example.com"
+> Sets the email 
+> 
+>       git config --global core.editor "vim"
+> Sets the editor 
+> 
+>       git config --global color.ui true
+> Sets the editor 
+> 
+</details>
+
+---
+
+<details>
+    <summary> git rm </summary>
+
+>       git rm --cached file.txt
+> Un-track staged file. Need to commit this change
+> 
+</details>
+
+---
+
+<details>
+    <summary> git ls-tree </summary>
+
+>       git ls-tree HEAD
+> Show tracked files.
+>
+> In order to track empty directories, create there `.gitkeep` empty files, to make them non-empty
+> 
+</details>
+
+---
+
+<details>
+    <summary> git mv </summary>
+
+>       git mv file1.txt file2.txt
+> Rename file1.txt -> file2.txt
+>
+> In order to track empty directories, create there `.gitkeep` empty files, to make them non-empty
+> 
+> You can achieve renaming of the file without `mv` command by the following way
+> 
+> 1. os remove committed file
+> 2. add new file with the same content ( > 50% similarity)
+> 3. git rm os removed file
+> 3. git status will show renaming
+</details>
+
+

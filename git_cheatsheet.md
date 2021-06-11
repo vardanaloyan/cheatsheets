@@ -2,9 +2,15 @@
 
 resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 
+gitignore: https://github.com/github/gitignore
+
 ## Terminology
 - Version Control System (VCS)
 - Source Code Management (SCM)
+
+## Data Integrity
+Git supports data integrity. You can't change/modify older commits (only the latest you can),
+because it keeps the parent commit's hash in commit's metadata.
 
 ## History behind git
 <details>
@@ -84,6 +90,7 @@ resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 >     git diff <commit_hash_1>..<commit_hash_2>
 > Difference between two commits. 
 >
+> ---
 >     git diff <commit_hash_1>..HEAD
 > In place of <commit_hash_2> can be used HEAD, if we want to compare with the latest commit
 
@@ -140,7 +147,66 @@ resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
 
 >       git commit -a
 > Commit without staging, but must be tracked files
+
+>       git commit --amend -m "your text here"
+> Modify the latest commit. Command will override the commit message.
+
+</details>
+
+---
+
+<details>
+  <summary> git checkout </summary>
+
+>       git checkout -- file.txt
+> UNDO changes of `file.txt` file in the working tree
 > 
+> ---
+>       git checkout -- .
+> UNDO all changes in the working tree
+> 
+> ---
+>       git checkout <commit_hash> -- file.txt
+> Retrieve  `file.txt` from the snapshot
+> 
+
+</details>
+
+---
+
+<details>
+  <summary> git reset </summary>
+
+>       git reset HEAD file.txt
+> UNDO changes of `file.txt` file in the staging tree (un-stage the file)
+> 
+> ---
+>       git reset HEAD .
+> UNDO all changes in the staging tree (un-stage files)
 
 
 </details>
+
+---
+
+<details>
+  <summary> git revert </summary>
+
+>       git revert <commit_hash>
+> UNDO/revert/reverse the commit. It will make a new commit.
+
+</details>
+
+---
+
+<details>
+  <summary> git clean </summary>
+
+>       git clean -n
+> Shows untracked files to remove
+> 
+>       git clean -f
+> Removes untracked files
+
+</details>
+

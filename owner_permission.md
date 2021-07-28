@@ -31,6 +31,13 @@ setfacl -m u:username:rwx myfolder
 	
 		setfacl -R -m u:username:rwx myfolder
 
+
+ABSOULUTE MODE
+!["ABSOULUTE MODE"](data/Absolute_mode.png "ABSOULUTE MODE Image")
+
+SYMBOLIC MODE
+!["SYMBOLIC MODE"](data/Symbolic_mode.png "SYMBOLIC MODE Image")
+
 --
 References
 

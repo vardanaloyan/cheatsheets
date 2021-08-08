@@ -234,4 +234,44 @@ When we exit original container, volume still exist in the second container unti
 
 ---
 
+### Building docker images
+
+Simple Dockerfile
+
+```bash
+FROM busybox
+RUN echo "building simple docker image"
+CMD echo "hello world!"
+```
+
+`docker build -t hello .` -- build docker image and tag the name "hello"
+
+---
+
+Build another image with this Dockerfile
+
+```bash
+FROM debian:sid
+RUN apt-get -y update
+RUN apt-get install -y nano
+CMD ["/bin/nano", "/tmp/notes"]
+```
+
+`docker build -t example/nanoer . ` -- build the image
+
+`docker run --rm -ti example/nanoer` -- run the container
+
+---
+
+```bash
+FROM example/nanoer
+ADD notes.txt /notes.txt
+CMD ["/bin/nano", "/notes.txt"]
+```
+`docker build -t example/notes . ` -- build the image
+
+`docker run --rm -ti example/notes` -- run the container
+
+
+
 source: [LinedIn learning](https://www.linkedin.com/learning/learning-docker-2018/the-docker-flow-images-to-containers?u=2113185)

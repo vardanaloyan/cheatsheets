@@ -272,6 +272,41 @@ CMD ["/bin/nano", "/notes.txt"]
 
 `docker run --rm -ti example/notes` -- run the container
 
+### Multi-project docker files
+
+```bash
+FROM ubuntu as builder
+RUN apt-get -y update
+RUN apt-get -y install curl
+RUN curl https://google.com | wc -l > /google-size.txt
+
+FROM alpine 
+COPY --from=builder /google-size.txt /google-size.txt
+ENTRYPOINT echo google size; cat /google-size.txt 
+```
+
+Pay attention to the size
+
+```bash
+Vardan_Aloyan@EPAMYERW0183 test % docker images             
+REPOSITORY               TAG       IMAGE ID       CREATED             SIZE
+simple                   latest    8d92e86836c1   21 seconds ago      5.6MB
+example/notes            latest    a6d04d4d3171   About an hour ago   146MB
+```
+
+---
+
+### docker registry 
+
+`docker run -d -p 5000:5000 --restart=always --name registry registry` -- run registry server
+
+---
+
+### Saving and loading images
+
+`docker save -o zipped.tar.gz simple` -- package docker images
+
+`docker load -i zipped.tar.gz` -- unpack and load packed docker images
 
 
 source: [LinedIn learning](https://www.linkedin.com/learning/learning-docker-2018/the-docker-flow-images-to-containers?u=2113185)

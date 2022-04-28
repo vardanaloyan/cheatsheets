@@ -9,6 +9,7 @@
 - `tmux at –t 0` - attach to the target (t) session
 - `tmux new -s Vardan` - Create session with custom name
 - `Ctrl + b + s` - show(list) sessions, you can navigate up/down using arrows to select the session and hit Enter, for switch
+- `Ctrl + b + $` - Rename current session
 
 ## Windows
 
@@ -18,6 +19,7 @@
 - `Ctrl + b + {0, 1, …, N}` - Move to the i-th window
 - `Ctrl + b + x` - Close current window (It will ask for a confirmation y/n on the status bar)
 - `Ctrl + b + w` - Show(list) windows
+- `Ctrl + b + ,` - Rename window name
 
 
 ## Panes

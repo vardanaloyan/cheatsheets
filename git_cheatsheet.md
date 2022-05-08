@@ -291,68 +291,68 @@ There are three types of configuration scopes in git
 > Tag in a git is a named reference to a commit, it makes it easy to find the commit later on.
 > 
 > Most often tags are used to mark releases (v1.0, v1.1, v2.0, ...)
-
+>
 > Usually tags are named using Semantic Versioning like v"major"."minor"."patch"
 >    - major : is a version number where you introduced breaking modifications (modifications of your new version are NOT compatible with previous versions);
 >    - minor : is a version number that is compatible with previous versions.
 >    - patch : is an increment for a bug fix or a patch fix done on your software.
-
+>
 > Git supports two types of tags: **lightweight** and **annotated**.
-
+>
 > Lightweight tags are just a pointers to a specific commits.
-
+>
 > Annotated tags are stored as full objects in git.
-
+>
 > They have:
 >    - Checksum
 >    - Tagger name, email
 >    - Tagging date
 >    - Message
-
-
+>
+>
 >       git tag # or -l or --list
 >    List of local tags
-
+>
 >       git tag -l "v.*"
 >    List all tags that starts with "v."
-   
+>   
 >       git tag -n
 >    List tags and messages
-
+>
 >       git tag v1.0
 >    Create a lightweight tag on HEAD
-
+>
 >       git tag -a v1.1 -m "my new version 1.1"
 >    Create an annotated tag on HEAD
-
+>
 >       git tag -a key_feature -m "Some information" 6c8fc6e
 >    Tag previous commit
-
+>
 >       git push origin v1.0
 >    Push v1.0 tag to remote.
-
+>
 >       git push --tags
 >    Push all tags to remote
-
+>
 >       git push -d origin v1.0
 >    Delete tag from remote
-
+>
 >       git push origin :v1.0
 >    Another way of deleting tag from remote
-
+>
 >       git tag -d v1.0
 >    Delete tag from local
-      
+>      
 >       git fetch --prune --prune-tags 
 >    Syncing remote tags with local (will remove local tags if not found in remote)
-
+>
 >       git checkout -b quick_fix v1.0
 >    Checkout to the tag with creating a branch
-
+>
 >       git checkout v1.0
 >    If you checkout tag without creating branch, you'll enter Detached HEAD mode.
-      
+>      
 >       git fetch --tags
 >    Fetch tags from remote
-
+>
 </details>

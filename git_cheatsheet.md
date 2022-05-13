@@ -1,6 +1,9 @@
 # Git cheatsheet
 
-resource: https://www.linkedin.com/learning/git-essential-training-the-basics/
+Resources used but not limited to.
+
+- https://www.linkedin.com/learning/git-essential-training-the-basics/
+- https://www.linkedin.com/learning/git-intermediate-techniques/
 
 gitignore: https://github.com/github/gitignore
 
@@ -355,4 +358,48 @@ There are three types of configuration scopes in git
 >       git fetch --tags
 >    Fetch tags from remote
 >
+</details>
+
+---
+
+<details>
+    <summary> git branch </summary>
+      
+      git branch --merged
+   All the commits that are in the listed branches are also in the current branch
+
+      git branch -d feature
+   Will delete feature branch, if it has been merged into the current branch, otherwise will  raise message
+
+      git branch -D feature
+   Delete feature branch (Delete branch that has not been merged yet)
+
+      git push origin :feature
+   Delete remote feature branch
+
+      git push -d origin feature  # --delete
+   Delete remote feature branch
+   
+</details>
+
+---
+
+<details>
+    <summary> git fetch </summary>
+      
+   There are three kind of branches in git.
+   
+   1. Remote branch feature
+   2. Local snapshot of the remote branch (origin/feature), also called **remote tracking branch**
+   3. Local branch feature
+
+   Stale branch is a remote-tracking branch that no longer tracks anything, because the actual branch in the
+   remote repository has been deleted. This can happen if someone deleted remote branch.
+
+      git remote prune origin
+   Delete stale remote-tracking branches. Possible to add `--dry-run` to run "test-delete"
+
+      git fetch -p  # --prune
+   Delete stale remote-tracking branches (fetch & prune)
+   
 </details>

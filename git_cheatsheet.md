@@ -68,9 +68,55 @@ because it keeps the parent commit's hash in commit's metadata.
 
 </details>
 
-## The three trees
+## Concepts
+<details>
+<summary> 
+The three trees
+</summary>
 
-> **Working** ⇨ `git add` ⇨ **Staging index** ⇨ `git commit` ⇨ **Repository**
+**Working** ⇨ `git add` ⇨ **Staging index** ⇨ `git commit` ⇨ **Repository**
+
+</details>
+
+---
+
+<details>
+<summary>
+Difference between HEAD~ (tilda) and HEAD^ (caret)
+</summary>
+
+```text
+ref~ is shorthand for ref~1 and means the commit's first parent. 
+ref~2 means the commit's first parent's first parent. 
+ref~3 means the commit's first parent's first parent's first parent. And so on.
+```
+
+```text
+ref^ is shorthand for ref^1 and means the commit's first parent. 
+But where the two differ is that ref^2 means the commit's second parent 
+(remember, commits can have two parents when they are a merge).
+```
+
+      The ^ and ~ operators can be combined.
+
+!["image"](./data/git_tilda_caret.png)
+[Reference](https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git)
+</details>
+
+<details>
+<summary> git reset vs revert vs checkout </summary>
+
+| Command      |     Scope     |                                                      Common use cases |
+|:-------------|:-------------:|----------------------------------------------------------------------:|
+| git reset    | Commit level  | Discard commits in a private branch or throw away uncommitted changes |
+| git reset    |  File level   |                                                        Unstage a file |
+| git checkout | 	Commit-level |                     	Switch between branches or inspect old snapshots |
+| git checkout |  	File-level  |                             	Discard changes in the working directory |
+| git revert 	 | Commit-level  |                                      	Undo commits in a public branch |
+| git revert 	 |  File-level   |                                                                	(N/A) |
+
+
+</details>
 
 ## Basic Commands
 <details>
@@ -185,13 +231,40 @@ because it keeps the parent commit's hash in commit's metadata.
 > 
 > ---
 >       git reset HEAD .
+>
+>       git reset
 > UNDO all changes in the staging tree (un-stage files)
-
-
+> 
+> ---
+>       git reset --soft HEAD~1
+> Remove last commit from the history and keep in staging
+> 
+>       git reset --mixed HEAD~1
+> Remove last commit from the history and keep in working
+> 
+>       git reset --hard HEAD~1
+> Remove last commit from the history and do not keep anywhere
+>       
 </details>
 
 ---
 
+<details>
+<summary>
+git restore
+</summary>
+
+      git restore file
+Restores (UNDO) changes of the file done in working tree 
+
+      git restore --staged file
+Restores (UNDO) changes of the file done in staging tree 
+
+git-restore is a tool to revert non-committed changes. 
+
+</details>
+
+---
 <details>
   <summary> git revert </summary>
 
@@ -379,7 +452,18 @@ There are three types of configuration scopes in git
 
       git push -d origin feature  # --delete
    Delete remote feature branch
-   
+
+   --- 
+
+      git branch -m new_branch_name
+   Rename local branch name
+
+      git push origin :old_branch_name new_branch_name
+   Change branch name in remote
+
+      git push -u origin new_branch_name
+   Set the upstream for new branch
+
 </details>
 
 ---

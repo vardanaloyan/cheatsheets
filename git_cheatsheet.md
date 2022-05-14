@@ -78,8 +78,6 @@ The three trees
 
 </details>
 
----
-
 <details>
 <summary>
 Difference between HEAD~ (tilda) and HEAD^ (caret)
@@ -315,6 +313,10 @@ There are three types of configuration scopes in git
 > 
 >       git config --global color.ui true
 > Sets the color 
+>     
+>     git config --global alias.pushd "push -u origin HEAD"
+> Define new alias for setting upstream
+> 
 > 
 </details>
 
@@ -437,7 +439,7 @@ There are three types of configuration scopes in git
 
 <details>
     <summary> git branch </summary>
-      
+
       git branch --merged
    All the commits that are in the listed branches are also in the current branch
 
@@ -463,6 +465,15 @@ There are three types of configuration scopes in git
 
       git push -u origin new_branch_name
    Set the upstream for new branch
+
+      git push -u origin HEAD
+   Alternatively pushing to HEAD is equivalent to pushing to remote branch having the same 
+   name as your current name
+
+   ---
+
+      git branch -vv
+   Show remote tracking branches
 
 </details>
 

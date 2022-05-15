@@ -1,12 +1,5 @@
 # Git cheatsheet
 
-Resources used but not limited to.
-
-- https://www.linkedin.com/learning/git-essential-training-the-basics/
-- https://www.linkedin.com/learning/git-intermediate-techniques/
-
-gitignore: https://github.com/github/gitignore
-
 ## Terminology
 - Version Control System (VCS)
 - Source Code Management (SCM)
@@ -117,6 +110,97 @@ But where the two differ is that ref^2 means the commit's second parent
 </details>
 
 ## Basic Commands
+
+<details>
+<summary>
+git add
+</summary>
+
+      git add file
+   Will add file to the staging with all it's changes.
+
+      git add -i
+   Add changes to the staging in interactive mode. It enters special menu.
+   ```text
+   What now> s
+              staged     unstaged path
+     1:    unchanged        +3/-0 file
+     2:    unchanged        +2/-0 file2
+   
+   *** Commands ***
+     1: status	  2: update	  3: revert	  4: add untracked
+     5: patch	  6: diff	  7: quit	  8: help
+   What now>  h
+   status        - show paths with changes
+   update        - add working tree state to the staged set of changes
+   revert        - revert staged set of changes back to the HEAD version
+   patch         - pick hunks and update selectively
+   diff          - view diff between HEAD and index
+   add untracked - add contents of untracked files to the staged set of changes
+   ```
+   ```
+   1: status is equivalent to `git status`
+   2: update is equivalent to `git add file`
+   3: revert is equivalent to `git restore --staged file`
+   4: add untracked is equivalent to `git add file`
+   5*: patch does not have equivalent (I think)
+   6: diff is equivalent to `git diff file`
+   ```
+   Patch mode (p)
+   
+   In patch mode we can select small portion of changes (hunks) for adding to staging state.
+   git automatically splits the changes into hunks. Minimum requirement to be able to split into
+   the hunks is to have one or more unchanged lines between changes.
+   
+   there are several commands in patch mode.
+
+   ```text
+   y - stage this hunk
+   n - do not stage this hunk
+   q - quit; do not stage this hunk or any of the remaining ones
+   a - stage this hunk and all later hunks in the file
+   d - do not stage this hunk or any of the later hunks in the file
+   s - split the current hunk into smaller hunks
+   e - manually edit the current hunk
+   ? - print help
+   ```
+   
+   Noteworthy is a split command. 
+   Split is telling git to split the hunk into smaller hunks if possible.
+   
+   If it is not more possible to split, but we want to prevent to add some parts, we can edit our hunks.
+   
+   We can enter edit mode (e).
+
+   Important to understand here diff-style prefixes: `+, _, #, <space>`
+   ```
+   - means deletion
+   + means addition
+   <space> means no change
+   `#` lines starting with number sign will be removed
+   ```
+   Here are important notes from git
+
+   ```text
+   # ---
+   # To remove '-' lines, make them ' ' lines (context).
+   # To remove '+' lines, delete them.
+   # Lines starting with # will be removed.
+   #
+   # If the patch applies cleanly, the edited hunk will immediately be
+   # marked for staging.
+   # If it does not apply cleanly, you will be given an opportunity to
+   # edit again.  If all lines of the hunk are removed, then the edit is
+   # aborted and the hunk is left unchanged.
+   ```
+
+      git add -p file
+   Directly enters to patch mode for the specified file.
+
+</details>
+
+---
+
 <details>
   <summary> git diff </summary>
 
@@ -498,3 +582,13 @@ There are three types of configuration scopes in git
    Delete stale remote-tracking branches (fetch & prune)
    
 </details>
+
+
+## Resources 
+
+   Used but not limited to.
+
+- https://www.linkedin.com/learning/git-essential-training-the-basics/
+- https://www.linkedin.com/learning/git-intermediate-techniques/
+
+gitignore: https://github.com/github/gitignore

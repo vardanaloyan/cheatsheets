@@ -73,7 +73,7 @@ The three trees
 
 <details>
 <summary>
-Difference between HEAD~ (tilda) and HEAD^ (caret)
+Difference between HEAD~ (tilda) and HEAD^ (caret) and HEAD@{} (at sign)
 </summary>
 
 ```text
@@ -92,6 +92,16 @@ But where the two differ is that ref^2 means the commit's second parent
 
 !["image"](./data/git_tilda_caret.png)
 [Reference](https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git)
+
+```text
+Git HEAD@{} or git HEAD followed by the at symbol and curly braces displays 
+where the reference or HEAD was pointing at different times in the local repository.
+```
+
+      git reflog
+   See reference logs, i.e logs of HEAD changes
+
+
 </details>
 
 <details>
@@ -444,7 +454,6 @@ There are three types of configuration scopes in git
 > 3. git status will show renaming
 </details>
 
-
 ---
 
 <details>
@@ -582,6 +591,99 @@ There are three types of configuration scopes in git
    Delete stale remote-tracking branches (fetch & prune)
    
 </details>
+
+---
+
+<details>
+<summary>
+git merge
+</summary>
+
+     git merge -X theirs main
+   If you are in feature branch and want to merge main to 
+   your branch and keep master changes
+
+     git merge -X ours main
+   If you are in feature branch and want to merge main to 
+   your branch and keep your changes
+
+      git checkout --ours file
+   To take the version of the file that is in current version
+
+      git checkout --theirs file
+   To take the version of the file that is in other version
+   
+</details>
+
+---
+
+<details>
+<summary>
+git cherry-pick
+</summary>
+   
+   Cherry-picking is changing commits sha. 
+
+     git cherry-pick hash
+   Pick the commit and apply the changes to current branch.
+   It can cause a conflict after solving conflict `git add` the changes, and
+   do `git cherry-pick --continue`
+   
+      git cherry-pick A^..B
+   Cherry pick commits between A and B. A is included.
+
+      git cherry-pick -e hash
+   Pick the commit and apply the changes to current branch, but modify 
+   the commit message
+   
+
+      git cherry-pick -X ours/theirs hash
+   Pick the commit but in case of conflicts take specified version.
+   Ours means current version, theirs means commit version.
+
+</details>
+
+---
+
+<details>
+<summary> Diff patches</summary>
+
+Diff patches are used to share changes using files. They don't have commit history in it.
+
+      git diff sha1..sha2 > output.diff
+   Create a diff patch by writing the diff between two commits into the file
+
+      git applu output.diff
+   Apply the diff path. It will add those changes into our working directory. We need to add and commit them.
+
+</details>
+
+---
+
+<details>
+<summary> Formatted patches</summary>
+
+- Formatted patches export each commit in Unix mailbox format. That format is useful for sending each change via the email.
+- In addition to usual git diff it also includes the information about commits, such as commit messages, author, etc...
+- Commit history is transferring, but after applying commits are going to be changed.
+- It puts one commit per file by default.
+
+      git format sha1..sha2 -o patches
+   Export commits between sha1 and sha2 inside `patches` directory. In order to include sha1 commit also we need to start
+   from sha1's previous commit.
+   
+      git format-patch master
+   Export all commits on current branch which are not in master branch.
+
+      git format-patch -1 shaX
+   Export single commit
+
+      git am patches/0001-something.patch
+   Apply formatted patch. It will make a commit.
+
+</details>
+
+---
 
 
 ## Resources 

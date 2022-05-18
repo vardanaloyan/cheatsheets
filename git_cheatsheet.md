@@ -363,6 +363,9 @@ git-restore is a tool to revert non-committed changes.
 >       git revert <commit_hash>
 > UNDO/revert/reverse the commit. It will make a new commit.
 
+        git revert <commit_hash> -m 1
+    Revert a merge commit. -m 1 shows the first parent.
+
 </details>
 
 ---
@@ -680,6 +683,17 @@ Diff patches are used to share changes using files. They don't have commit histo
 
       git am patches/0001-something.patch
    Apply formatted patch. It will make a commit.
+
+</details>
+
+---
+
+<details>
+<summary> git merge-base </summary>
+
+    git merge-base main feature
+   
+Find as good common ancestors as possible for a merge.
 
 </details>
 

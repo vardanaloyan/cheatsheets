@@ -73,7 +73,7 @@ The three trees
 
 <details>
 <summary>
-Difference between HEAD~ (tilda) and HEAD^ (caret) and HEAD@{} (at sign)
+HEAD~ (tilda) vs HEAD^ (caret) vs HEAD@{} (at sign)
 </summary>
 
 ```text
@@ -105,7 +105,7 @@ where the reference or HEAD was pointing at different times in the local reposit
 </details>
 
 <details>
-<summary> git reset vs revert vs checkout </summary>
+<summary> Reset vs Revert vs Checkout </summary>
 
 | Command      |     Scope     |                                                      Common use cases |
 |:-------------|:-------------:|----------------------------------------------------------------------:|
@@ -119,13 +119,23 @@ where the reference or HEAD was pointing at different times in the local reposit
 </details>
 
 <details>
-<summary> git merge vs rebase </summary>
+<summary> Merge vs Rebase </summary>
 
 - Merge to bring large topic back into main
 
 - Rebase to add minor commits in main to a topic branch
 
 </details>
+
+<details>
+<summary> Clean local branches </summary>
+
+    git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d
+
+Delete local branches that do not have upstream
+
+</details>
+
 
 ## Basic Commands
 

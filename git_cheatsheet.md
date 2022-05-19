@@ -116,6 +116,14 @@ where the reference or HEAD was pointing at different times in the local reposit
 | git revert 	 | Commit-level  |                                      	Undo commits in a public branch |
 | git revert 	 |  File-level   |                                                                	(N/A) |
 
+</details>
+
+<details>
+<summary> git merge vs rebase </summary>
+
+- Merge to bring large topic back into main
+
+- Rebase to add minor commits in main to a topic branch
 
 </details>
 
@@ -266,7 +274,15 @@ git add
 >     git log --oneline
 > Show commits each in one line
 
+>     git log --oneline --graph --decorate
+> Show commit graph
 
+>     git log -p"
+> Show log with patch (diff)
+
+>     git log -L 1,5:file"
+> Show logs only for the specific line of specific file. It automatically applies patch mode
+ 
 </details>
 
 ---
@@ -699,6 +715,112 @@ Find as good common ancestors as possible for a merge.
 
 ---
 
+<details>
+<summary> git rebase </summary>
+
+Rebasing means take commits from a branch and replay them at the end of another branch
+
+![img.png](./data/before_rebase_1.png)
+    
+       git rebase master
+
+We are currently on `new_feature` branch. It uses current branch by default
+
+Graph view after running the command above.
+
+![img.png](./data/after_rebase_1.png)
+
+It changes commit hashes.
+
+The same result will be done by the following command
+
+        git rebase master new_feature
+
+First it checks out to `new_feature` branch, then is doing the rebase
+
+
+Rebase onto other branch
+
+![img.png](./data/rebase_onto_1.png)
+
+    git rebase --onto master ecommerce new_feature  # git rebase --onto master upstream branch
+
+- master -> new base, can also be a commit hash
+- ecommerce -> old base
+- new_feature -> branch to move
+  
+
+    git reset --hard ORIG_HEAD
+
+Undo a simple rebase, git keeps HEAD before `merge`, `reset`, `rebase` commands in a temporary variable called `ORIG_HEAD`.
+
+    git rebase -i main
+Do rebase in interactive mode. Rebase makes todo list, you can pick, squash, edit, etc... commits.
+
+
+    git rebase -i HEAD~4
+Edit commits without moving them to another base. Rebase branch on it's on place.
+
+
+- Squash means combine change sets, concatenate messages
+
+- If commit has more than one author, it will take first author.
+
+- There should be one pick on the top.
+
+
+    git pull --rebase
+
+Git pull is fetch and merge, but if we do not want to merge origin/main with main, we can use --rebase option to rebase our
+existing commits on top of origin/main.
+
+
+    git pull --rebase=preserve
+If the commits what we are rebasing that have some merge commits, better use preserve in order not to flatten them
+
+</details>
+
+---
+
+<details>
+<summary> git blame</summary>
+
+    git blame file
+Show annotated file with commit information.
+
+    git blame -L 1,5 file
+Show annotated lines of the specific file with commit information.
+
+    git blame -L 1,+5 file
+Show annotated lines of the specific file with commit information. first number is the start and second number is the
+number of lines to go up or down (negative number)
+
+</details>
+
+---
+
+
+<details>
+<summary> git bisect </summary>
+
+- Helps to identify bad version or revision to find it
+- It checks out the code in between the bad and good commits each time.
+- We need to mark last good revision and first bad revision
+
+
+    git bisect start
+Start bisect procedure
+
+    git bisect bad <sha, branch, tag>
+Mark bad revision
+
+    git bisect good <sha, branch, tag>
+Mark good revision
+
+    git bisect reset
+Reset when you've done
+
+</details>
 
 ## Resources 
 

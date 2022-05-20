@@ -682,7 +682,7 @@ Diff patches are used to share changes using files. They don't have commit histo
       git diff sha1..sha2 > output.diff
    Create a diff patch by writing the diff between two commits into the file
 
-      git applu output.diff
+      git apply output.diff
    Apply the diff path. It will add those changes into our working directory. We need to add and commit them.
 
 </details>

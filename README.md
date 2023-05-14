@@ -7,5 +7,6 @@ In this repo I will keep my cheatsheets
 - [docker cheatsheet](docker_cheatsheet.md)
 - [vim cheatsheet](vim_cheatsheet.md)
 - [tmux cheatsheet](tmux_cheatsheet.md)
+- [awk cheatsheet](awk_cheatsheet.md)
 - coming...
 

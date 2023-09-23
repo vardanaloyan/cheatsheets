@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  mongodb_container:
+    image: mongo:4.4.6
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data_db_1:/data/db
+#      - ./sample.conf:/etc/mongo/mongod.conf
+#    command: ["mongod", "--config", "/etc/mongo/mongod.conf"]
+    command: ["mongod", "--directoryperdb"]
+
